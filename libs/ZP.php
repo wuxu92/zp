@@ -120,9 +120,9 @@ class ZP {
      */
     public static function end($exitCode = 0)
     {
-        global $startTime;
+        global $__startTime;
         //ZP::$logger->closeTrace();
-        ZP::info('end: ' . microtime(true) . ' cost time: ' . (microtime(true) - $startTime), null, false);
+        ZP::info('end: ' . microtime(true) . ' cost time: ' . (microtime(true) - $__startTime), null, false);
         //ZP::$logger->restoreTrace();
 
         exit($exitCode);

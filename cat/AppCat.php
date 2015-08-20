@@ -29,7 +29,7 @@ class AppCat extends Category {
         $page = $this->getParam('page', 1);
         $size = $this->getParam('size', 20);
         $apps = App::getByPage($page, $size);
-        $this->retObj->append($apps)->json();
+        $this->retObj->setData($apps)->json();
     }
 
     public function updateAction() {
@@ -44,7 +44,7 @@ class AppCat extends Category {
         $m = new App($_POST);
 
         $res = $m->update();
-        $this->retObj->append(array('result' => $res))
+        $this->retObj->setData(array('result' => $res))
             ->json();
     }
 
@@ -67,7 +67,7 @@ class AppCat extends Category {
 
         $m = new App($_POST);
         $res = $m->insert();
-        $this->retObj->append(array('result' => $res))
+        $this->retObj->setData(array('result' => $res))
             ->json();
     }
 
@@ -82,7 +82,7 @@ class AppCat extends Category {
             $this->error(ErrorCode::INVALID_PARAM)
                 ->json();
         }
-        $this->retObj->append(array('result' => App::deleteById(intval($id))) );
+        $this->retObj->setData(array('result' => App::deleteById(intval($id))) );
         //$this->retObj->append(array('result' => App::deleteById(intval($id))) );
         $this->retObj->json();
     }
@@ -95,7 +95,7 @@ class AppCat extends Category {
         $id = $this->getParam('id', 1);
         $app = App::findById(intval($id));
 
-        $this->retObj->append(array('data' => $app))->json();
+        $this->retObj->setData(array('data' => $app))->json();
     }
 
     /**
@@ -110,7 +110,7 @@ class AppCat extends Category {
             $this->error(ErrorCode::INVALID_PARAM, true);
         }
         //var_dump($ids); exit;
-        $this->retObj->append(App::findByIdList($ids))->json();
+        $this->retObj->setData(App::findByIdList($ids))->json();
     }
 
 }

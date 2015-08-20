@@ -116,6 +116,7 @@ abstract class Model {
     }
 
     /**
+     * 根据id删除记录，确保id转换为了int型
      * @param $pk int id value
      * @return bool|int
      */
@@ -165,6 +166,15 @@ abstract class Model {
 
         return array('count'=>intval($count), 'page'=>$page, 'size'=>$size, 'data' => $rows);
     }
+
+
+    public static function getAll() {
+        $sql = 'select * from ' . static::tableName();
+
+        return ZP::app()->db->createSql($sql)
+            ->queryAll();
+    }
+
 
     protected function columnsSql() {
         $cols = $this->columns();

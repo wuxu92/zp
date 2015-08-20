@@ -53,7 +53,7 @@ class Category {
      * @param bool $exit
      * @return $this
      */
-    public function error($code, $exit = false)
+    public function error($code, $exit = true)
     {
         $this->retObj->error($code, $exit);
         return $this;

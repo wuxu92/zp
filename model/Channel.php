@@ -1,15 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
+ * User: wuxu@zplay,cn
  * Date: 2015/8/20
  * Time: 14:27
  */
 
-namespace cat;
+namespace model;
 
 
 use libs\Model;
+use libs\ZP;
 
 class Channel extends Model {
 
@@ -47,6 +48,21 @@ class Channel extends Model {
             'ggqdsjffbl'
         );
     }
+
+    public static function tableName() {
+        return 'channel';
+    }
+
+
+    public static function instanceByChannelId($cid) {
+        $sql = 'select * from ' . self::tableName() . ' where channel_id=' . "'{$cid}'";
+
+        $row = ZP::app()->db->createSql($sql)->queryOne();
+
+        if (empty($row)) return null;
+        return new self($row);
+    }
+
 
     
 }

@@ -28,6 +28,7 @@ class RenderObject {
 
     public function setData($data) {
         $this->data = $data;
+        return $this;
     }
 
     /**
@@ -56,8 +57,8 @@ class RenderObject {
     public function json($exit = true, $exitCode=0) {
         header('Content-type: application/json');
         echo json_encode(array(
-            'status' => $this->status,
-            'msg'    => $this->msg,
+            'errno' => $this->status,
+            'error'    => $this->msg,
             'data'   => $this->data
         ));
 

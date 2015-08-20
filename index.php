@@ -14,11 +14,11 @@ $config = require(__DIR__ . '/config/main.php');
 $exHandler = new \libs\ExceptionHandler();
 $exHandler->register();
 
-global $startTime;
-$startTime = microtime(true);
+global $__startTime;
+$__startTime = microtime(true);
 
 ZP::init();
-ZP::info("start: " . $startTime, null, false);
+ZP::info("start: " . $__startTime, null, false);
 
 // get cat and cat
 $cat = 'Index';
