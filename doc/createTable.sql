@@ -65,6 +65,7 @@ LOAD DATA LOCAL INFILE '/home/wuxu/tmp/country.csv' INTO TABLE `country` FIELDS 
 
 DROP TABLE IF EXISTS `sp`;
 CREATE TABLE `sp` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '自增id',
   `name` VARCHAR(64) NOT NULL COMMENT '运营商名称',
   `code` VARCHAR(16) NOT NULL COMMENT '运营商代码',
   `country` VARCHAR(64) COMMENT '国家',
