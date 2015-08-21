@@ -42,8 +42,10 @@ CREATE TABLE channel_mmid (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 LOAD DATA LOCAL INFILE '/home/wuxu/tmp/channel_mmid.csv' INTO TABLE `channel_mmid` FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 0 LINES ;
 
+
 DROP TABLE IF EXISTS `language`;
 CREATE TABLE language (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '自增id',
   `abbr` VARCHAR(16) NOT NULL UNIQUE COMMENT '语言简称',
   `lang` VARCHAR(32) NOT NULL COMMENT '语言名称',
   INDEX `abbr_idx` (abbr)
@@ -52,6 +54,7 @@ LOAD DATA LOCAL INFILE '/home/wuxu/tmp/language.csv' INTO TABLE `language` FIELD
 
 DROP TABLE IF EXISTS `country`;
 CREATE TABLE country (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '自增id',
   `name` VARCHAR(64) NOT NULL UNIQUE COMMENT '国家名称',
   `code` VARCHAR(16) COMMENT '国家代码',
   `abbr` VARCHAR(16) COMMENT '国家简称',

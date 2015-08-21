@@ -14,6 +14,7 @@ use libs\Model;
 class Sp extends Model{
 
     public $id;
+    public $name;
     public $code;
     public $country;
     public $plmn;
@@ -22,10 +23,11 @@ class Sp extends Model{
      * 返回数据表的各列
      * @return array
      */
-    function columns()
+    public function columns()
     {
-        array(
+        return array(
             'id',
+            'name',
             'code',
             'country',
             'plmn'

@@ -118,8 +118,7 @@ class ZP {
      * 运行的结束函数，理论上所有请求的结束都应该以调用此函数结束
      * @param int $exitCode 退出状态码
      */
-    public static function end($exitCode = 0)
-    {
+    public static function end($exitCode = 0) {
         global $__startTime;
         //ZP::$logger->closeTrace();
         ZP::info('end: ' . microtime(true) . ' cost time: ' . (microtime(true) - $__startTime), null, false);

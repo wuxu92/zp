@@ -13,6 +13,7 @@ use libs\Model;
 
 class Lang extends Model{
 
+    public $id;
     public $abbr;
     public $lang;
     /**
@@ -22,6 +23,7 @@ class Lang extends Model{
     function columns()
     {
         return array(
+            'id',
             'abbr',
             'lang'
         );

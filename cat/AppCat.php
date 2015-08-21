@@ -16,7 +16,6 @@ use model\App;
 
 class AppCat extends Category {
 
-    public $searchDistance = 100; // 找东南西北100km内的城市
     /**
      * 列出所有绑定的应用
      * 添加分页
@@ -32,8 +31,16 @@ class AppCat extends Category {
         $this->retObj->setData($apps)->json();
     }
 
+    /**
+     * 更新一条记录
+     */
     public function updateAction() {
-        //var_dump($_POST);
+
+        if (!RequestHelper::getIsPostRequest()) {
+            $this->render('update');
+            ZP::app()->end();
+        }
+
         $id = intval($this->postParam('id', 0)); // intval return 0 on failure
 
         if (0 === $id || empty($_POST['product_id']) || empty($_POST['product_name'])) {
@@ -83,7 +90,6 @@ class AppCat extends Category {
                 ->json();
         }
         $this->retObj->setData(array('result' => App::deleteById(intval($id))) );
-        //$this->retObj->append(array('result' => App::deleteById(intval($id))) );
         $this->retObj->json();
     }
 

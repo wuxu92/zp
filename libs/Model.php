@@ -13,9 +13,14 @@ namespace libs;
  * model的基类，各个模型需要实现静态方法tableName，因为数据查询方法使用
  * 的是后期静态绑定的静态方法 static::tableName()
  * Class Model
+ * @var $id int
  * @package libs
  */
 abstract class Model {
+
+    /**
+     * @var $id int
+     */
 
     /**
      * default construct method for model class
@@ -68,10 +73,12 @@ abstract class Model {
 
     /**
      * update database with this instance
+     * @update 2015-08-21
+     * @author wuxu#zplay.cn
      * @param array|string $where
      * @return int
      */
-    public function update($where='1') {
+    public function update($where=null) {
         ZP::info("update from model");
         $sql = 'update ' . static::tableName() . ' set ';
         $cols = $this->columns();
@@ -81,7 +88,8 @@ abstract class Model {
             $bindArr[":$col"] = $this->$col;
         }
         $sql = rtrim($sql, ',');
-        $sql .= self::whereSql($where);
+        if (is_null($where) && isset($this->id)) $sql .= ' where id=' . $this->id;
+        else $sql .= self::whereSql($where);
 
         ZP::info("update sql:" . $sql);
 
@@ -91,7 +99,7 @@ abstract class Model {
     /**
      * 根据id查询记录，返回对应对象
      * @param $pk int id value
-     * @return null|static
+     * @return null|static|object
      */
     public static function findById($pk) {
         if ( !is_int($pk)) return null;
@@ -175,6 +183,17 @@ abstract class Model {
             ->queryAll();
     }
 
+    public static function getByCondition($col, $val) {
+        $sql = 'select * from ' . static::tableName() . " where $col=:col";
+        return ZP::app()->db->createSql($sql, array(':col'=>$val))
+            ->queryAll();
+    }
+
+    public static function getByArray($where) {
+        $sql = 'select * from ' . static::tableName() . ' ' . self::whereSql($where);
+        return ZP::app()->db->createSql($sql)->queryAll();
+    }
+
 
     protected function columnsSql() {
         $cols = $this->columns();
@@ -182,7 +201,7 @@ abstract class Model {
         return "( $colStr )";
     }
 
-    public static function whereSql($where='1') {
+    private static function whereSql($where='1') {
         if (is_string($where)) return ' where ' . $where;
         if (!is_array($where)) return ' ';
         $sql = ' where ';

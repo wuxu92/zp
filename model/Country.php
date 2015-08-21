@@ -14,6 +14,7 @@ use libs\ZP;
 
 class Country extends Model{
 
+    public $id;
     public $name;
     public $code;
     public $abbr;
@@ -28,6 +29,7 @@ class Country extends Model{
     function columns()
     {
         return array(
+            'id',
             'name',
             'code',
             'abbr',
