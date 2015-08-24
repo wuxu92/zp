@@ -7,7 +7,7 @@
  */
 ?>
 <p>添加应用</p>
-<form method="post" action="/apps/index.php?r=app/add" >
+<form method="post" action="/apps/web/index.php?r=app/add" >
   <div class="row">
     <div class="small-8 columns">
       <div class="row">

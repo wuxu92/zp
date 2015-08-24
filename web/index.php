@@ -3,12 +3,11 @@
 use libs\ZP;
 
 defined('DEBUG') or define('DEBUG', true);
-defined('APP_ROOT') or define('APP_ROOT', __DIR__);
+defined('APP_ROOT') or define('APP_ROOT', dirname(__DIR__));
 
-require(__DIR__ . '/libs/autoload.php');
+require(APP_ROOT . '/libs/autoload.php');
 
-$config = require(__DIR__ . '/config/main.php');
-
+$config = require(APP_ROOT . '/config/main.php');
 
 // register exception handler
 $exHandler = new \libs\ExceptionHandler();
@@ -54,7 +53,7 @@ $cat = new $catClass();
 
 $result = $cat->$actMethod();
 
-var_dump($result);
+//var_dump($result);
 
 ZP::end(0);
 
